@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kotama Shoes — Garansi 3 Bulan</title>
+  <meta name="description" content="Form garansi 3 bulan Kotama Shoes bergaya klasik mewah dengan tampilan spektakuler." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* === Root Variables & Fonts === */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Raleway:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #f8f3eb;
+      --accent: #3b2b20;
+      --gold: #caa75d;
+      --gold-light: #e6d4b1;
+      --muted: #84786d;
+      --card: #fffdf9;
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * { 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #faf5ed, #f0e7d8);
+      color: var(--accent);
+      font-family: 'Raleway', sans-serif;
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 2px solid rgba(202,167,93,0.2);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      background: linear-gradient(135deg, #3b2b20, #5a4634);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path fill="%23caa75d" d="M50,10 C70,10 90,25 90,50 C90,75 70,90 50,90 C30,90 10,75 10,50 C10,25 30,10 50,10 Z" /></svg>');
+      background-size: 150px;
+      opacity: 0.1;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; 
+      left: 50%; 
+      transform: translateX(-50%);
+      width: 120px; 
+      height: 3px;
+      background: var(--gold);
+      border-radius: 3px;
+    }
+
+    .logo-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 18px;
+    }
+
+    header img.logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      transition: var(--transition);
+    }
+
+    .logo-container:hover img.logo {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      letter-spacing: 1px;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      color: #e8dcca;
+      margin-top: 10px;
+      font-size: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 30px;
+      padding: 40px;
+    }
+
+    @media (max-width: 900px) {
+      main { 
+        grid-template-columns: 1fr; 
+        padding: 24px;
+        gap: 20px;
+      }
+    }
+
+    .card {
+      background: #fffefb;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label { 
+      font-size: 13px; 
+      font-weight: 600; 
+      margin-bottom: 6px; 
+      display: block; 
+      color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .input-container {
+      position: relative;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 10px;
+      font-family: 'Raleway', sans-serif;
+      background: #fff;
+      transition: var(--transition);
+      font-size: 14px;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(202,167,93,0.2);
+    }
+
+    textarea { 
+      resize: vertical; 
+      min-height: 90px; 
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .btn:hover { 
+      background: #2c1e15; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.gold { 
+      background: var(--gold); 
+      color: var(--accent); 
+    }
+
+    .btn.gold:hover {
+      background: var(--gold-light);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: rgba(59,43,32,0.05);
+    }
+
+    .terms {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--muted);
+      border-left: 3px solid var(--gold);
+      padding-left: 16px;
+      background: rgba(202,167,93,0.05);
+      padding: 16px;
+      border-radius: 8px;
+    }
+
+    .terms ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .terms li {
+      margin-bottom: 6px;
+    }
+
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin-top: 10px; 
+      font-size: 13px;
+    }
+
+    th, td { 
+      border-bottom: 1px solid #eee; 
+      padding: 10px 8px; 
+      text-align: left; 
+    }
+
+    th { 
+      color: var(--accent); 
+      font-weight: 700; 
+      background: rgba(202,167,93,0.05);
+    }
+
+    tr:hover {
+      background: rgba(0,0,0,0.02);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid rgba(0,0,0,0.05);
+      background: #faf7f1;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      background: #2e7d32;
+    }
+
+    .toast.error {
+      background: #c62828;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .admin-panel {
+      position: relative;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    #entriesArea {
+      max-height: 400px;
+      overflow: auto;
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+    }
+
+    .empty-state i {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: var(--gold-light);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .search-box {
+      margin-bottom: 16px;
+    }
+
+    .search-box input {
+      padding-left: 40px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .notes-section {
+      background: rgba(255,249,230,0.5);
+      border: 1px solid rgba(202,167,93,0.3);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .notes-section h4 {
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .complaint-section {
+      background: rgba(255,230,230,0.5);
+      border: 1px solid rgba(205,92,92,0.3);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .complaint-section h4 {
+      color: #8B4513;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .complaint-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(205,92,92,0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #8B4513;
+      margin-left: 10px;
+    }
+
+    .complaint-tag {
+      background: rgba(205,92,92,0.1);
+      color: #8B4513;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <img src="LOGO-removebg-preview.png" alt="Logo Kotama" class="logo" />
+      </div>
+      <h1>Kotama Shoes</h1>
+      <p>Formulir Registrasi Garansi 3 Bulan — Eksklusif & Bergaya Mewah</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <form id="warrantyForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="buyerName">Nama Pembeli</label>
+              <div class="input-container">
+                <input id="buyerName" required />
+                <i class="fas fa-user input-icon"></i>
+              </div>
+              <div class="error-message" id="nameError"></div>
+            </div>
+            <div class="form-group">
+              <label for="phone">No. HP</label>
+              <div class="input-container">
+                <input id="phone" required />
+                <i class="fas fa-phone input-icon"></i>
+              </div>
+              <div class="error-message" id="phoneError"></div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-container">
+                <input id="email" type="email" />
+                <i class="fas fa-envelope input-icon"></i>
+              </div>
+              <div class="error-message" id="emailError"></div>
+            </div>
+            <div class="form-group">
+              <label for="purchaseDate">Tanggal Pembelian</label>
+              <div class="input-container">
+                <input id="purchaseDate" type="date" required />
+                <i class="fas fa-calendar input-icon"></i>
+              </div>
+              <div class="error-message" id="dateError"></div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="model">Model / Nama Produk</label>
+              <div class="input-container">
+                <input id="model" required />
+                <i class="fas fa-shoe-prints input-icon"></i>
+              </div>
+              <div class="error-message" id="modelError"></div>
+            </div>
+            <div class="form-group">
+              <label for="size">Ukuran</label>
+              <div class="input-container">
+                <input id="size" />
+                <i class="fas fa-ruler input-icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="store">Toko / Penjual</label>
+            <div class="input-container">
+              <input id="store" />
+              <i class="fas fa-store input-icon"></i>
+            </div>
+          </div>
+
+          <!-- BAGIAN CATATAN KELUHAN YANG DISEDERHANAKAN -->
+          <div class="complaint-section">
+            <h4><i class="fas fa-exclamation-circle"></i> Keluhan untuk Perbaikan
+              <span class="complaint-indicator">
+                <i class="fas fa-file-export"></i> Otomatis tersimpan ke komplain.json
+              </span>
+            </h4>
+            
+            <div class="form-group">
+              <label for="complaintNotes">Deskripsi Keluhan / Kerusakan</label>
+              <textarea id="complaintNotes" placeholder="Jelaskan keluhan atau kerusakan yang dialami secara singkat dan jelas... (contoh: jahitan sedikit lepas di bagian samping, sol depan sedikit terlepas, dll)"></textarea>
+              <div style="font-size: 12px; color: var(--muted); margin-top: 5px;">
+                * Keluhan akan otomatis tersimpan ke file komplain.json
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 24px;">
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button type="submit" class="btn gold" id="submitBtn">
+                <i class="fas fa-save"></i> Simpan & Cetak Bukti
+              </button>
+              <button type="reset" class="btn btn-outline">
+                <i class="fas fa-redo"></i> Reset Form
+              </button>
+            </div>
+          </div>
+
+          <div class="terms">
+            <strong>Ketentuan Garansi 3 Bulan:</strong>
+            <ul>
+              <li>Berlaku 3 bulan sejak tanggal pembelian</li>
+              <li>Menanggung perbaikan ringan (jahitan lepas, sol terlepas minor)</li>
+              <li>Tidak termasuk kerusakan akibat pemakaian normal, air, atau benturan keras</li>
+              <li>Perbaikan akan dilakukan maksimal 7 hari kerja</li>
+              <li>Garansi tidak termasuk penggantian produk baru</li>
+            </ul>
+          </div>
+        </form>
+      </section>
+
+      <aside class="card admin-panel">
+        <h3 style="margin-top:0; display:flex; align-items:center; gap:10px;">
+          <i class="fas fa-cog"></i> Panel Admin
+        </h3>
+        <p style="font-size:13px;color:var(--muted); margin-bottom:16px;">Data tersimpan di localStorage. Dapat diekspor ke CSV / JSON.</p>
+        
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-value" id="totalEntries">0</span>
+            <span>Total Entri</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="totalComplaints">0</span>
+            <span>Total Keluhan</span>
+          </div>
+        </div>
+        
+        <div class="search-box">
+          <div class="input-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Cari data...">
+          </div>
+        </div>
+        
+        <div class="admin-actions">
+          <button id="showEntries" class="btn gold">
+            <i class="fas fa-list"></i> Lihat Entri
+          </button>
+          <button id="exportCsv" class="btn">
+            <i class="fas fa-file-csv"></i> Export CSV
+          </button>
+          <button id="exportJson" class="btn">
+            <i class="fas fa-file-code"></i> Export JSON
+          </button>
+          <button id="viewComplaints" class="btn" style="background:#8B4513;">
+            <i class="fas fa-eye"></i> Lihat Keluhan
+          </button>
+          <button id="exportComplaints" class="btn" style="background:#8B4513;">
+            <i class="fas fa-file-export"></i> Export Keluhan
+          </button>
+          <button id="clearAll" class="btn btn-outline">
+            <i class="fas fa-trash"></i> Hapus Semua
+          </button>
+        </div>
+        <div id="entriesArea" class="empty-state">
+          <i class="fas fa-inbox"></i>
+          <p>Belum ada data garansi yang tersimpan</p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      © 2025 Kotama Shoes — Garansi 3 Bulan • Sepatu Handmade Berkualitas
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const STORAGE_KEY = 'kotama_warranty_entries_v5';
+    const COMPLAINTS_KEY = 'kotama_complaints_v2';
+    const form = document.getElementById('warrantyForm');
+    const entriesArea = document.getElementById('entriesArea');
+    const toast = document.getElementById('toast');
+    const totalEntriesEl = document.getElementById('totalEntries');
+    const totalComplaintsEl = document.getElementById('totalComplaints');
+    const searchInput = document.getElementById('searchInput');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      updateStats();
+      renderEntries();
+      
+      // Set today's date as default for purchase date
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('purchaseDate').value = today;
+    });
+
+    function showToast(message, type = 'success') {
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function readEntries() { 
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function readComplaints() { 
+      try {
+        return JSON.parse(localStorage.getItem(COMPLAINTS_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveEntries(data) { 
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); 
+      updateStats();
+    }
+
+    function saveComplaint(complaintData) { 
+      const complaints = readComplaints();
+      complaints.push(complaintData);
+      localStorage.setItem(COMPLAINTS_KEY, JSON.stringify(complaints)); 
+      updateStats();
+      
+      // Simpan ke file komplain.json secara otomatis
+      downloadComplaintsFile();
+    }
+
+    function downloadComplaintsFile() {
+      const complaints = readComplaints();
+      const blob = new Blob([JSON.stringify(complaints, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      
+      // Buat link unduhan tersembunyi
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'komplain.json';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    function updateStats() {
+      const entries = readEntries();
+      const complaints = readComplaints();
+      
+      totalEntriesEl.textContent = entries.length;
+      totalComplaintsEl.textContent = complaints.length;
+    }
+
+    function renderEntries(searchTerm = '') {
+      const arr = readEntries();
+      const filteredArr = searchTerm 
+        ? arr.filter(entry => 
+            Object.values(entry).some(value => 
+              String(value).toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          )
+        : arr;
+      
+      if (!filteredArr.length) {
+        entriesArea.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-${searchTerm ? 'search' : 'inbox'}"></i>
+            <p>${searchTerm ? 'Tidak ada data yang sesuai dengan pencarian' : 'Belum ada data garansi yang tersimpan'}</p>
+          </div>
+        `;
+        return;
+      }
+      
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Nama</th>
+              <th>HP</th>
+              <th>Model</th>
+              <th>Keluhan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      filteredArr.slice().reverse().forEach((e, index) => {
+        // Potong teks keluhan jika terlalu panjang
+        const complaintPreview = e.complaintNotes 
+          ? (e.complaintNotes.length > 30 ? e.complaintNotes.substring(0, 30) + '...' : e.complaintNotes)
+          : '-';
+          
+        html += `
+          <tr>
+            <td>${escapeHtml(e.createdAt)}</td>
+            <td>${escapeHtml(e.buyerName)}</td>
+            <td>${escapeHtml(e.phone)}</td>
+            <td>${escapeHtml(e.model)}</td>
+            <td title="${escapeHtml(e.complaintNotes || '')}">
+              ${escapeHtml(complaintPreview)}
+              ${e.complaintNotes ? '<span class="complaint-tag">Keluhan</span>' : ''}
+            </td>
+            <td>
+              <button class="btn" onclick="viewEntryDetails(${arr.length - 1 - index})" style="padding: 4px 8px; font-size: 12px;">
+                <i class="fas fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+      
+      html += '</tbody></table>';
+      entriesArea.innerHTML = html;
+    }
+
+    function viewEntryDetails(index) {
+      const entries = readEntries();
+      const entry = entries[index];
+      
+      if (!entry) return;
+      
+      const w = window.open('', '_blank');
+      w.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Detail Garansi - ${escapeHtml(entry.buyerName)}</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+            .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #caa75d; padding-bottom: 20px; }
+            .detail { margin-bottom: 15px; }
+            .label { font-weight: bold; color: #3b2b20; }
+            .notes-section { background: #fffaf0; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #caa75d; }
+            .complaint-section { background: #ffeaea; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #cd5c5c; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>KOTAMA SHOES</h1>
+            <h2>BUKTI REGISTRASI GARANSI 3 BULAN</h2>
+          </div>
+          <div class="detail"><span class="label">Nama Pembeli:</span> ${escapeHtml(entry.buyerName)}</div>
+          <div class="detail"><span class="label">No. HP:</span> ${escapeHtml(entry.phone)}</div>
+          <div class="detail"><span class="label">Email:</span> ${escapeHtml(entry.email)}</div>
+          <div class="detail"><span class="label">Model Produk:</span> ${escapeHtml(entry.model)}</div>
+          <div class="detail"><span class="label">Ukuran:</span> ${escapeHtml(entry.size)}</div>
+          <div class="detail"><span class="label">Toko/Penjual:</span> ${escapeHtml(entry.store)}</div>
+          <div class="detail"><span class="label">Tanggal Pembelian:</span> ${escapeHtml(entry.purchaseDate)}</div>
+          
+          ${entry.complaintNotes ? `
+          <div class="complaint-section">
+            <h3 style="color:#8B4513; margin-top:0;">Catatan Keluhan untuk Perbaikan</h3>
+            <div class="detail">${escapeHtml(entry.complaintNotes)}</div>
+          </div>
+          ` : `
+          <div class="notes-section">
+            <h3 style="color:#3b2b20; margin-top:0;">Catatan</h3>
+            <div class="detail">Tidak ada catatan keluhan</div>
+          </div>
+          `}
+          
+          <div class="detail"><span class="label">Tanggal Registrasi:</span> ${escapeHtml(entry.createdAt)}</div>
+          <div style="margin-top: 30px; text-align: center; border-top: 1px solid #ccc; padding-top: 20px;">
+            <p><strong>Masa Garansi:</strong> 3 Bulan sejak tanggal pembelian</p>
+            <p><em>Terima kasih telah mendaftarkan garansi. Untuk perbaikan, hubungi toko tempat pembelian.</em></p>
+          </div>
+        </body>
+        </html>
+      `);
+      w.document.close();
+    }
+
+    function viewComplaints() {
+      const complaints = readComplaints();
+      
+      if (!complaints.length) {
+        entriesArea.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>Belum ada data keluhan yang tersimpan</p>
+          </div>
+        `;
+        return;
+      }
+      
+      let html = `
+        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <h4 style="margin: 0; color: #8B4513;"><i class="fas fa-exclamation-circle"></i> Daftar Keluhan</h4>
+          <span class="complaint-tag">${complaints.length} keluhan</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Waktu</th>
+              <th>Nama</th>
+              <th>HP</th>
+              <th>Model</th>
+              <th>Keluhan</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      complaints.slice().reverse().forEach(complaint => {
+        const complaintPreview = complaint.complaintNotes.length > 40 
+          ? complaint.complaintNotes.substring(0, 40) + '...' 
+          : complaint.complaintNotes;
+          
+        html += `
+          <tr>
+            <td>${escapeHtml(complaint.id)}</td>
+            <td>${escapeHtml(new Date(complaint.timestamp).toLocaleString('id-ID'))}</td>
+            <td>${escapeHtml(complaint.buyerName)}</td>
+            <td>${escapeHtml(complaint.phone)}</td>
+            <td>${escapeHtml(complaint.model)}</td>
+            <td title="${escapeHtml(complaint.complaintNotes)}">${escapeHtml(complaintPreview)}</td>
+            <td>
+              <span class="complaint-tag">${escapeHtml(complaint.status)}</span>
+            </td>
+          </tr>
+        `;
+      });
+      
+      html += '</tbody></table>';
+      entriesArea.innerHTML = html;
+    }
+
+    function validateForm() {
+      let isValid = true;
+      
+      // Clear previous errors
+      document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+      
+      // Validate name
+      const name = document.getElementById('buyerName').value.trim();
+      if (!name) {
+        document.getElementById('nameError').textContent = 'Nama pembeli harus diisi';
+        isValid = false;
+      }
+      
+      // Validate phone
+      const phone = document.getElementById('phone').value.trim();
+      if (!phone) {
+        document.getElementById('phoneError').textContent = 'No. HP harus diisi';
+        isValid = false;
+      } else if (!/^[0-9+\-\s()]{10,}$/.test(phone)) {
+        document.getElementById('phoneError').textContent = 'Format No. HP tidak valid';
+        isValid = false;
+      }
+      
+      // Validate email if provided
+      const email = document.getElementById('email').value.trim();
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('emailError').textContent = 'Format email tidak valid';
+        isValid = false;
+      }
+      
+      // Validate purchase date
+      const purchaseDate = document.getElementById('purchaseDate').value;
+      if (!purchaseDate) {
+        document.getElementById('dateError').textContent = 'Tanggal pembelian harus diisi';
+        isValid = false;
+      } else {
+        const selectedDate = new Date(purchaseDate);
+        const today = new Date();
+        if (selectedDate > today) {
+          document.getElementById('dateError').textContent = 'Tanggal pembelian tidak boleh di masa depan';
+          isValid = false;
+        }
+      }
+      
+      // Validate model
+      const model = document.getElementById('model').value.trim();
+      if (!model) {
+        document.getElementById('modelError').textContent = 'Model produk harus diisi';
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      if (!validateForm()) {
+        return;
+      }
+      
+      // Show loading state
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<div class="loading"></div> Memproses...';
+      submitBtn.disabled = true;
+      
+      // Simulate processing delay
+      setTimeout(() => {
+        const entry = {
+          buyerName: form.querySelector('#buyerName').value.trim(),
+          phone: form.querySelector('#phone').value.trim(),
+          email: form.querySelector('#email').value.trim(),
+          purchaseDate: form.querySelector('#purchaseDate').value,
+          model: form.querySelector('#model').value.trim(),
+          size: form.querySelector('#size').value.trim(),
+          store: form.querySelector('#store').value.trim(),
+          // Hanya catatan keluhan sederhana
+          complaintNotes: document.getElementById('complaintNotes').value.trim(),
+          createdAt: new Date().toLocaleString('id-ID')
+        };
+        
+        // Save to main entries
+        const all = readEntries(); 
+        all.push(entry); 
+        saveEntries(all);
+        
+        // Save to separate complaints file jika ada keluhan
+        if (entry.complaintNotes) {
+          const complaintData = {
+            id: 'COMP-' + Date.now(),
+            timestamp: new Date().toISOString(),
+            buyerName: entry.buyerName,
+            phone: entry.phone,
+            model: entry.model,
+            complaintNotes: entry.complaintNotes,
+            purchaseDate: entry.purchaseDate,
+            status: 'pending'
+          };
+          saveComplaint(complaintData);
+        }
+        
+        renderEntries();
+        
+        // Print receipt
+        viewEntryDetails(all.length - 1);
+        
+        showToast('Data berhasil disimpan! Bukti garansi telah dibuka di jendela baru.');
+        form.reset();
+        
+        // Reset button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Set today's date again after reset
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('purchaseDate').value = today;
+      }, 1000);
+    });
+
+    document.getElementById('showEntries').onclick = () => renderEntries();
+    
+    document.getElementById('viewComplaints').onclick = () => viewComplaints();
+    
+    document.getElementById('clearAll').onclick = () => {
+      if (confirm('Apakah Anda yakin ingin menghapus semua data garansi? Tindakan ini tidak dapat dibatalkan.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(COMPLAINTS_KEY);
+        entriesArea.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-check-circle"></i>
+            <p>Semua data telah dihapus</p>
+          </div>
+        `;
+        updateStats();
+        showToast('Semua data berhasil dihapus');
+      }
+    };
+    
+    document.getElementById('exportCsv').onclick = () => {
+      const arr = readEntries();
+      if (!arr.length) return showToast('Belum ada data untuk diekspor', 'error');
+      
+      const keys = ['createdAt', 'buyerName', 'phone', 'email', 'purchaseDate', 'model', 'size', 'store', 'complaintNotes'];
+      const csv = [keys.join(',')].concat(
+        arr.map(o => keys.map(k => `"${(o[k] || '').replace(/"/g, '""')}"`).join(','))
+      ).join('\n');
+      
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `kotama_garansi_${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      
+      showToast('Data berhasil diekspor ke CSV');
+    };
+    
+    document.getElementById('exportJson').onclick = () => {
+      const arr = readEntries();
+      if (!arr.length) return showToast('Belum ada data untuk diekspor', 'error');
+      
+      const blob = new Blob([JSON.stringify(arr, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `kotama_garansi_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      
+      showToast('Data berhasil diekspor ke JSON');
+    };
+
+    // EKSPOR DATA KELUHAN KE FILE KOMPLAIN.JSON
+    document.getElementById('exportComplaints').onclick = () => {
+      const complaints = readComplaints();
+      if (!complaints.length) return showToast('Belum ada data keluhan untuk diekspor', 'error');
+      
+      downloadComplaintsFile();
+      showToast('Data keluhan berhasil diekspor ke file komplain.json');
+    };
+
+    // Search functionality
+    searchInput.addEventListener('input', () => {
+      renderEntries(searchInput.value.trim());
+    });
+
+    // Real-time validation
+    document.querySelectorAll('input, textarea').forEach(input => {
+      input.addEventListener('blur', () => {
+        validateForm();
+      });
+    });
+  </script>
+</body>
+</html>
