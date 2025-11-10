@@ -114,7 +114,7 @@
 
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 32px;
+      font-size: clamp(24px, 5vw, 32px);
       letter-spacing: 1px;
       margin: 0;
       position: relative;
@@ -124,7 +124,7 @@
     header p {
       color: #e8dcca;
       margin-top: 10px;
-      font-size: 15px;
+      font-size: clamp(13px, 3vw, 15px);
       position: relative;
       z-index: 1;
     }
@@ -218,6 +218,7 @@
       justify-content: center;
       gap: 8px;
       font-size: 14px;
+      min-height: 44px;
     }
 
     .btn:hover { 
@@ -317,6 +318,7 @@
       transform: translateY(100px);
       opacity: 0;
       transition: var(--transition);
+      max-width: 90vw;
     }
 
     .toast.show {
@@ -477,6 +479,92 @@
       font-size: 11px;
       font-weight: 600;
     }
+
+    .error-message {
+      color: #c62828;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+      box-shadow: var(--shadow);
+      position: relative;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .modal.show .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .modal-close:hover {
+      color: var(--accent);
+    }
+
+    .download-options {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 480px) {
+      .admin-actions {
+        flex-direction: column;
+      }
+      
+      .download-options {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -560,7 +648,7 @@
           <div class="complaint-section">
             <h4><i class="fas fa-exclamation-circle"></i> Keluhan untuk Perbaikan
               <span class="complaint-indicator">
-                <i class="fas fa-file-export"></i> Otomatis tersimpan ke komplain.json
+                <i class="fas fa-file-export"></i> Tersimpan ke sistem
               </span>
             </h4>
             
@@ -568,7 +656,7 @@
               <label for="complaintNotes">Deskripsi Keluhan / Kerusakan</label>
               <textarea id="complaintNotes" placeholder="Jelaskan keluhan atau kerusakan yang dialami secara singkat dan jelas... (contoh: jahitan sedikit lepas di bagian samping, sol depan sedikit terlepas, dll)"></textarea>
               <div style="font-size: 12px; color: var(--muted); margin-top: 5px;">
-                * Keluhan akan otomatis tersimpan ke file komplain.json
+                * Keluhan akan tersimpan ke sistem dan dapat diekspor nanti
               </div>
             </div>
           </div>
@@ -653,11 +741,28 @@
     </footer>
   </div>
 
+  <!-- Modal untuk konfirmasi ekspor -->
+  <div class="modal" id="exportModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h3>Ekspor Data Keluhan</h3>
+      <p>Pilih format untuk mengekspor data keluhan:</p>
+      <div class="download-options">
+        <button id="exportComplaintsJson" class="btn" style="background:#8B4513;">
+          <i class="fas fa-file-code"></i> Export JSON
+        </button>
+        <button id="exportComplaintsCsv" class="btn" style="background:#8B4513;">
+          <i class="fas fa-file-csv"></i> Export CSV
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script>
-    const STORAGE_KEY = 'kotama_warranty_entries_v5';
-    const COMPLAINTS_KEY = 'kotama_complaints_v2';
+    const STORAGE_KEY = 'kotama_warranty_entries_v6';
+    const COMPLAINTS_KEY = 'kotama_complaints_v3';
     const form = document.getElementById('warrantyForm');
     const entriesArea = document.getElementById('entriesArea');
     const toast = document.getElementById('toast');
@@ -665,6 +770,10 @@
     const totalComplaintsEl = document.getElementById('totalComplaints');
     const searchInput = document.getElementById('searchInput');
     const submitBtn = document.getElementById('submitBtn');
+    const exportModal = document.getElementById('exportModal');
+    const closeModal = document.getElementById('closeModal');
+    const exportComplaintsJson = document.getElementById('exportComplaintsJson');
+    const exportComplaintsCsv = document.getElementById('exportComplaintsCsv');
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
@@ -711,25 +820,6 @@
       complaints.push(complaintData);
       localStorage.setItem(COMPLAINTS_KEY, JSON.stringify(complaints)); 
       updateStats();
-      
-      // Simpan ke file komplain.json secara otomatis
-      downloadComplaintsFile();
-    }
-
-    function downloadComplaintsFile() {
-      const complaints = readComplaints();
-      const blob = new Blob([JSON.stringify(complaints, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      
-      // Buat link unduhan tersembunyi
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'komplain.json';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
     }
 
     function escapeHtml(s) {
@@ -929,12 +1019,16 @@
       let isValid = true;
       
       // Clear previous errors
-      document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.textContent = '';
+        el.classList.remove('show');
+      });
       
       // Validate name
       const name = document.getElementById('buyerName').value.trim();
       if (!name) {
         document.getElementById('nameError').textContent = 'Nama pembeli harus diisi';
+        document.getElementById('nameError').classList.add('show');
         isValid = false;
       }
       
@@ -942,9 +1036,11 @@
       const phone = document.getElementById('phone').value.trim();
       if (!phone) {
         document.getElementById('phoneError').textContent = 'No. HP harus diisi';
+        document.getElementById('phoneError').classList.add('show');
         isValid = false;
       } else if (!/^[0-9+\-\s()]{10,}$/.test(phone)) {
         document.getElementById('phoneError').textContent = 'Format No. HP tidak valid';
+        document.getElementById('phoneError').classList.add('show');
         isValid = false;
       }
       
@@ -952,6 +1048,7 @@
       const email = document.getElementById('email').value.trim();
       if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         document.getElementById('emailError').textContent = 'Format email tidak valid';
+        document.getElementById('emailError').classList.add('show');
         isValid = false;
       }
       
@@ -959,12 +1056,14 @@
       const purchaseDate = document.getElementById('purchaseDate').value;
       if (!purchaseDate) {
         document.getElementById('dateError').textContent = 'Tanggal pembelian harus diisi';
+        document.getElementById('dateError').classList.add('show');
         isValid = false;
       } else {
         const selectedDate = new Date(purchaseDate);
         const today = new Date();
         if (selectedDate > today) {
           document.getElementById('dateError').textContent = 'Tanggal pembelian tidak boleh di masa depan';
+          document.getElementById('dateError').classList.add('show');
           isValid = false;
         }
       }
@@ -973,6 +1072,7 @@
       const model = document.getElementById('model').value.trim();
       if (!model) {
         document.getElementById('modelError').textContent = 'Model produk harus diisi';
+        document.getElementById('modelError').classList.add('show');
         isValid = false;
       }
       
@@ -1001,7 +1101,6 @@
           model: form.querySelector('#model').value.trim(),
           size: form.querySelector('#size').value.trim(),
           store: form.querySelector('#store').value.trim(),
-          // Hanya catatan keluhan sederhana
           complaintNotes: document.getElementById('complaintNotes').value.trim(),
           createdAt: new Date().toLocaleString('id-ID')
         };
@@ -1096,13 +1195,58 @@
       showToast('Data berhasil diekspor ke JSON');
     };
 
-    // EKSPOR DATA KELUHAN KE FILE KOMPLAIN.JSON
+    // EKSPOR DATA KELUHAN - TIDAK AUTO DOWNLOAD
     document.getElementById('exportComplaints').onclick = () => {
       const complaints = readComplaints();
       if (!complaints.length) return showToast('Belum ada data keluhan untuk diekspor', 'error');
       
-      downloadComplaintsFile();
-      showToast('Data keluhan berhasil diekspor ke file komplain.json');
+      // Tampilkan modal pilihan format
+      exportModal.classList.add('show');
+    };
+
+    // Ekspor keluhan ke JSON
+    exportComplaintsJson.onclick = () => {
+      const complaints = readComplaints();
+      const blob = new Blob([JSON.stringify(complaints, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `komplain_kotama_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      
+      exportModal.classList.remove('show');
+      showToast('Data keluhan berhasil diekspor ke JSON');
+    };
+
+    // Ekspor keluhan ke CSV
+    exportComplaintsCsv.onclick = () => {
+      const complaints = readComplaints();
+      const keys = ['id', 'timestamp', 'buyerName', 'phone', 'model', 'complaintNotes', 'purchaseDate', 'status'];
+      const csv = [keys.join(',')].concat(
+        complaints.map(o => keys.map(k => `"${(o[k] || '').replace(/"/g, '""')}"`).join(','))
+      ).join('\n');
+      
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `komplain_kotama_${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      
+      exportModal.classList.remove('show');
+      showToast('Data keluhan berhasil diekspor ke CSV');
+    };
+
+    // Tutup modal
+    closeModal.onclick = () => {
+      exportModal.classList.remove('show');
+    };
+
+    // Tutup modal jika klik di luar konten modal
+    exportModal.onclick = (e) => {
+      if (e.target === exportModal) {
+        exportModal.classList.remove('show');
+      }
     };
 
     // Search functionality
