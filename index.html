@@ -551,6 +551,43 @@
       flex-wrap: wrap;
     }
 
+    /* PERBAIKAN RESPONSIVITAS PANEL ADMIN */
+    .admin-panel {
+      min-width: 0; /* Penting untuk mencegah overflow */
+    }
+    
+    #entriesArea {
+      overflow-x: auto; /* Memungkinkan scroll horizontal */
+      -webkit-overflow-scrolling: touch; /* Scroll halus di perangkat mobile */
+    }
+    
+    #entriesArea table {
+      min-width: 600px; /* Lebar minimum untuk tabel */
+      width: 100%;
+    }
+    
+    @media (max-width: 768px) {
+      .admin-actions {
+        flex-direction: column;
+      }
+      
+      .admin-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .stats {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .stat-item {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+    
     @media (max-width: 480px) {
       .admin-actions {
         flex-direction: column;
@@ -564,6 +601,25 @@
         width: 100%;
         justify-content: center;
       }
+      
+      main {
+        padding: 16px;
+      }
+      
+      .card {
+        padding: 16px;
+      }
+    }
+
+    /* Tambahan untuk tabel yang lebih responsif */
+    .responsive-table {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    
+    .responsive-table table {
+      min-width: 600px;
+      width: 100%;
     }
   </style>
 </head>
@@ -858,18 +914,19 @@
       }
       
       let html = `
-        <table>
-          <thead>
-            <tr>
-              <th>Waktu</th>
-              <th>Nama</th>
-              <th>HP</th>
-              <th>Model</th>
-              <th>Keluhan</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div class="responsive-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Nama</th>
+                <th>HP</th>
+                <th>Model</th>
+                <th>Keluhan</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
       `;
       
       filteredArr.slice().reverse().forEach((e, index) => {
@@ -897,7 +954,7 @@
         `;
       });
       
-      html += '</tbody></table>';
+      html += '</tbody></table></div>';
       entriesArea.innerHTML = html;
     }
 
@@ -976,19 +1033,20 @@
           <h4 style="margin: 0; color: #8B4513;"><i class="fas fa-exclamation-circle"></i> Daftar Keluhan</h4>
           <span class="complaint-tag">${complaints.length} keluhan</span>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Waktu</th>
-              <th>Nama</th>
-              <th>HP</th>
-              <th>Model</th>
-              <th>Keluhan</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div class="responsive-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Waktu</th>
+                <th>Nama</th>
+                <th>HP</th>
+                <th>Model</th>
+                <th>Keluhan</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
       `;
       
       complaints.slice().reverse().forEach(complaint => {
@@ -1011,7 +1069,7 @@
         `;
       });
       
-      html += '</tbody></table>';
+      html += '</tbody></table></div>';
       entriesArea.innerHTML = html;
     }
 
